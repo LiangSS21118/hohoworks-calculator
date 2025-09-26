@@ -2,106 +2,172 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>簡單報價計算器</title>
+  <title>Hoho Works 報價計算器</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: #F7F3EB; /* 米白背景 */
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 650px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #4C3B36; /* 咖啡棕 */
+      margin-bottom: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    label {
+      font-weight: 600;
+      color: #4C3B36;
+    }
+    select, input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    select:focus, input:focus {
+      border-color: #4C3B36;
+      outline: none;
+      box-shadow: 0 0 6px rgba(76, 59, 54, 0.4);
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: #4C3B36; /* 咖啡棕 */
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #3a2e2a;
+    }
+    .notice {
+      border-left: 5px solid #E6A157; /* 點綴橙色 */
+      background: #fffdf8;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      color: #5a4b47;
+      line-height: 1.5;
+    }
+    .result {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #4C3B36;
+      margin-top: 25px;
+    }
+  </style>
 </head>
 <body>
-  <h2>服務報價計算器</h2>
+  <div class="container">
+    <h2>Hoho Works 報價計算器</h2>
 
-  <!-- 注意事項 -->
-  <div style="border:1px solid #ccc; padding:10px; margin-bottom:15px; background:#f9f9f9;">
-    <strong>⚠️ 注意事項：</strong>
-    <ol>
-      <li>報價僅供參考，實際價格須等詳細評估才算數。</li>
-      <li>此報價不含優惠計算，想了解優惠請點選「最新優惠」，並於實際報價時提供。</li>
-      <li>客製化不提供報價，請聯絡客服詢問，感謝配合！</li>
-      <li>接受合理議價，私訊詢問～</li>
-    </ol>
-  </div>
-
-  <!-- 選項表單 -->
-  <label>請選擇服務類型：</label><br>
-  <select id="category">
-    <option value="video">影片剪輯類</option>
-    <option value="design">設計美編類</option>
-    <option value="web">網頁動畫類</option>
-  </select>
-  <br><br>
-
-  <!-- 影片類 -->
-  <div id="videoOptions">
-    <label>影片類型：</label><br>
-    <select id="videoType">
-      <option value="1">純字幕</option>
-      <option value="2">照片剪輯影片</option>
-      <option value="3">各式影片</option>
-    </select><br><br>
-
-    <label>成品分鐘數：</label><br>
-    <input type="number" id="minutes" value="1" min="1"><br><br>
-
-    <div id="photoInput" style="display:none;">
-      <label>照片張數（大概即可）：</label><br>
-      <input type="number" id="photoCount" value="0" min="0"><br><br>
+    <!-- 注意事項 -->
+    <div class="notice">
+      ⚠️ 注意事項：
+      <ol>
+        <li>報價僅供參考，實際價格須等詳細評估才算數。</li>
+        <li>此報價不含優惠計算，想了解優惠請點選「最新優惠」，並於實際報價時提供。</li>
+        <li>客製化及網頁動畫類不提供報價，請聯絡客服詢問，感謝配合！</li>
+        <li>接受合理議價，請私訊詢問～</li>
+      </ol>
     </div>
 
-    <div id="extraInput" style="display:none;">
-      <label>手繪圖張數：</label><br>
-      <input type="number" id="drawings" value="0" min="0"><br><br>
+    <!-- 選項表單 -->
+    <label>請選擇服務類型：</label>
+    <select id="category">
+      <option value="video">影片剪輯類</option>
+      <option value="design">設計美編類</option>
+    </select>
 
-      <label>是否添加創意特效？</label><br>
-      <select id="effects">
-        <option value="0">否</option>
-        <option value="1">是</option>
-      </select><br><br>
+    <!-- 影片類 -->
+    <div id="videoOptions">
+      <label>影片類型：</label>
+      <select id="videoType">
+        <option value="1">純字幕</option>
+        <option value="2">照片剪輯影片</option>
+        <option value="3">各式影片</option>
+      </select>
+
+      <label>成品分鐘數：</label>
+      <input type="number" id="minutes" value="1" min="1">
+
+      <div id="photoInput" style="display:none;">
+        <label>照片張數（大概即可）：</label>
+        <input type="number" id="photoCount" value="0" min="0">
+      </div>
+
+      <div id="extraInput" style="display:none;">
+        <label>手繪圖張數：</label>
+        <input type="number" id="drawings" value="0" min="0">
+
+        <label>是否添加創意特效？</label>
+        <select id="effects">
+          <option value="0">否</option>
+          <option value="1">是</option>
+        </select>
+      </div>
     </div>
-  </div>
 
-  <!-- 設計美編類 -->
-  <div id="designOptions" style="display:none;">
-    <label>美編類型：</label><br>
-    <select id="designType">
-      <option value="basic">一般美編（海報/傳單/客製化設計）</option>
-      <option value="slides">簡報/學習歷程/DM/社群模組貼文</option>
-    </select><br><br>
+    <!-- 設計美編類 -->
+    <div id="designOptions" style="display:none;">
+      <label>美編類型：</label>
+      <select id="designType">
+        <option value="basic">一般美編（海報/傳單/客製化設計）</option>
+        <option value="slides">簡報/學習歷程/DM/社群模組貼文</option>
+      </select>
 
-    <div id="designPages" style="display:none;">
-      <label>頁數：</label><br>
-      <input type="number" id="pages" value="10" min="1"><br><br>
+      <div id="designPages" style="display:none;">
+        <label>頁數：</label>
+        <input type="number" id="pages" value="10" min="1">
+      </div>
+
+      <div id="copywritingOption" style="display:none;">
+        <label>是否加購文案協助與文字優化？</label>
+        <select id="copywriting">
+          <option value="0">否</option>
+          <option value="1">是（+30%）</option>
+        </select>
+      </div>
     </div>
 
-    <div id="copywritingOption" style="display:none;">
-      <label>是否加購文案協助與文字優化？</label><br>
-      <select id="copywriting">
-        <option value="0">否</option>
-        <option value="1">是（+30%）</option>
-      </select><br><br>
-    </div>
+    <!-- 急單選項 -->
+    <label>是否為急單？</label>
+    <select id="urgent">
+      <option value="0">否</option>
+      <option value="1">是</option>
+    </select>
+
+    <button onclick="calc()">計算報價</button>
+
+    <div id="result" class="result"></div>
   </div>
-
-  <!-- 網頁動畫類 -->
-  <div id="webOptions" style="display:none;">
-    <label>網頁動畫類型：</label><br>
-    <select id="webType">
-      <option value="simple">簡單動畫網頁</option>
-      <option value="interactive">互動型動畫網頁</option>
-    </select><br><br>
-  </div>
-
-  <!-- 急單選項 -->
-  <label>是否為急單？</label><br>
-  <select id="urgent">
-    <option value="0">否</option>
-    <option value="1">是</option>
-  </select><br><br>
-
-  <button onclick="calc()">計算報價</button>
-  <h3 id="result"></h3>
 
 <script>
 const categorySelect = document.getElementById("category");
 const videoOptions = document.getElementById("videoOptions");
 const designOptions = document.getElementById("designOptions");
-const webOptions = document.getElementById("webOptions");
 const designPages = document.getElementById("designPages");
 const copywritingOption = document.getElementById("copywritingOption");
 
@@ -113,7 +179,6 @@ const extraInput = document.getElementById("extraInput");
 categorySelect.addEventListener("change", function(){
   videoOptions.style.display = (this.value === "video") ? "block" : "none";
   designOptions.style.display = (this.value === "design") ? "block" : "none";
-  webOptions.style.display = (this.value === "web") ? "block" : "none";
 });
 
 // 影片類子選項
@@ -127,7 +192,7 @@ videoType.addEventListener("change", function(){
 document.getElementById("designType").addEventListener("change", function(){
   const val = this.value;
   designPages.style.display = (val === "slides") ? "block" : "none";
-  copywritingOption.style.display = (val === "slides") ? "block" : "none"; // 只在 slides 顯示文案加購
+  copywritingOption.style.display = (val === "slides") ? "block" : "none";
 });
 
 // 計算報價
@@ -175,15 +240,6 @@ function calc(){
       if(copywriting){
         money = Math.round(money * 1.3);
       }
-    }
-  }
-
-  if(category === "web"){
-    const webType = document.getElementById("webType").value;
-    if(webType === "simple"){
-      money = 500;
-    } else if(webType === "interactive"){
-      money = 300;
     }
   }
 
